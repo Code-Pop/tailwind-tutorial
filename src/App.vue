@@ -47,4 +47,10 @@ export default {
   -moz-box-shadow: 0px 2px 15px -12px rgba(0, 0, 0, 0.57);
   box-shadow: 2px 15px -12px rgba(0, 0, 0, 0.57);
 }
+
+@media only screen and (max-width: 600px) {
+  #app {
+    width: 100%;
+  }
+}
 </style>

@@ -97,6 +97,7 @@ textarea {
   -webkit-box-shadow: 0px 2px 15px -12px rgba(0, 0, 0, 0.57);
   -moz-box-shadow: 0px 2px 15px -12px rgba(0, 0, 0, 0.57);
   box-shadow: 2px 15px -12px rgba(0, 0, 0, 0.57);
+  box-sizing: border-box;
 }
 
 .review-form .button {
@@ -107,6 +108,7 @@ textarea {
 @media only screen and (max-width: 600px) {
   .review-form {
     width: 90%;
+    margin: 0px;
   }
 }
 </style>

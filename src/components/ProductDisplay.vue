@@ -138,6 +138,11 @@ img {
 }
 
 @media only screen and (max-width: 600px) {
+
+  .product-display {
+    width: 100%;
+  }
+
   .product-image,
   .product-info {
     margin-left: 10px;
