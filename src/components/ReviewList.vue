@@ -1,6 +1,15 @@
+<script setup>
+const props = defineProps({
+  reviews: {
+    type: Array,
+    required: true
+  }
+})
+</script>
+
 <template>
   <div class="review-container">
-  <h3>Reviews:</h3>
+    <h3>Reviews:</h3>
     <ul>
       <li v-for="(review, index) in reviews" :key="index">
         {{ review.name }} gave this {{ review.rating }} stars
@@ -13,17 +22,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    reviews: {
-      type: Array,
-      required: true
-    }
-  }
-}
-</script>
-
 <style scoped>
 
 .review-container {
@@ -34,9 +32,17 @@ export default {
   -moz-box-shadow: 0px 2px 20px -12px rgba(0, 0, 0, 0.57);
   box-shadow: 2px 20px -12px rgba(0, 0, 0, 0.57);
   margin-left: 40px;
+  box-sizing: border-box;
 }
 
 .review-container li {
   margin-bottom: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  .review-container {
+    width: 90%;
+    margin-left: 0px;
+  }
 }
 </style>

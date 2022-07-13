@@ -1,3 +1,63 @@
+<script setup>
+import { ref, computed } from 'vue'
+import ReviewForm from './ReviewForm.vue'
+import ReviewList from './ReviewList.vue'
+import socksBlueImage from '../assets/socks_blue.jpg'
+import socksGreenImage from '../assets/socks_green.jpg'
+
+const props = defineProps({
+  premium: {
+    type: Boolean,
+    required: true
+  }
+})
+
+const emit = defineEmits(['add-to-cart'])
+
+const product = ref('Socks')
+const brand = ref('Vue Mastery')
+const selectedVariant = ref(0)
+const details = ref(['50% cotton', '30% wool', '20% polyester'])
+
+const variants = ref([
+  { id: 2234, color: 'green', image: socksGreenImage, quantity: 50 },
+  { id: 2235, color: 'blue', image: socksBlueImage, quantity: 0 },
+])
+
+const reviews = ref([])
+    
+const title = computed(() => {
+  return brand.value + ' ' + product.value
+})
+
+const image = computed(() => {
+  return variants.value[selectedVariant.value].image
+})
+
+const inStock = computed(() => {
+  return variants.value[selectedVariant.value].quantity
+})
+
+const shipping = computed(() => {
+  if (props.premium) {
+    return 'Free'
+  }
+  return 2.99
+})
+
+function addToCart() {
+  emit('add-to-cart', variants.value[selectedVariant.value].id)
+}
+
+function updateVariant(index) {
+  selectedVariant.value = index
+}
+
+function addReview(review) {
+  reviews.value.push(review)
+}
+</script>
+
 <template>
   <div class="product-display">
     <div class="product-container">
@@ -33,67 +93,6 @@
     <review-form @review-submitted="addReview"></review-form>
   </div>
 </template>
-
-<script>
-import ReviewForm from './ReviewForm.vue'
-import ReviewList from './ReviewList.vue'
-import socksBlueImage from '../assets/socks_blue.jpg'
-import socksGreenImage from '../assets/socks_green.jpg'
-
-export default {
-  components: {
-    ReviewList,
-    ReviewForm
-  },
-  props: {
-    premium: {
-      type: Boolean,
-      required: true
-    }
-  },
-  data() {
-    return {
-      product: 'Socks',
-      brand: 'Vue Mastery',
-      selectedVariant: 0,
-      details: ['50% cotton', '30% wool', '20% polyester'],
-      variants: [
-        { id: 2234, color: 'green', image: socksGreenImage, quantity: 50 },
-        { id: 2235, color: 'blue', image: socksBlueImage, quantity: 0 },
-      ],
-      reviews: []
-    }
-  },
-  methods: {
-    addToCart() {
-        this.$emit('add-to-cart', this.variants[this.selectedVariant].id)
-    },
-    updateVariant(index) {
-        this.selectedVariant = index
-    },
-    addReview(review) {
-      this.reviews.push(review)
-    }
-  },
-  computed: {
-    title() {
-        return this.brand + ' ' + this.product
-    },
-    image() {
-        return this.variants[this.selectedVariant].image
-    },
-    inStock() {
-        return this.variants[this.selectedVariant].quantity
-    },
-    shipping() {
-      if (this.premium) {
-        return 'Free'
-      }
-      return 2.99
-    }
-  }
-}
-</script>
 
 <style scoped>
 

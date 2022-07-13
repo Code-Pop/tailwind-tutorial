@@ -1,3 +1,36 @@
+<script setup>
+import { ref } from 'vue'
+
+const emit = defineEmits(['review-submitted'])
+
+const name = ref('')
+const review = ref('')
+const rating = ref(null)
+const recommend = ref(null)
+
+function onSubmit() {
+  if (name.value === '' || review.value === '' || rating.value === null || recommend.value === null) {
+    alert('Review is incomplete. Please fill out every field.')
+    return
+  }
+
+  let productReview = {
+    name: name.value,
+    review: review.value,
+    rating: rating.value,
+    recommend: recommend.value
+
+  }
+
+  emit('review-submitted', productReview)
+
+  name.value = ''
+  review.value = ''
+  rating.value = null
+  recommend.value = null
+}
+</script>
+
 <template>
   <form class="review-form" @submit.prevent="onSubmit">
     <h3>Leave a review</h3>
@@ -21,42 +54,6 @@
     <input class="button" type="submit" value="Submit">  
   </form>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      name: '',
-      review: '',
-      rating: null,
-      recommend: null
-    }
-  },
-  methods: {
-    onSubmit() {
-      if (this.name === '' || this.review === '' || this.rating === null || this.recommend === null) {
-        alert('Review is incomplete. Please fill out every field.')
-        return
-      }
-
-      let productReview = {
-        name: this.name,
-        review: this.review,
-        rating: this.rating,
-        recommend: this.recommend
-
-      }
-
-      this.$emit('review-submitted', productReview)
-
-      this.name = ''
-      this.review = ''
-      this.rating = null
-      this.recommend = null
-    }
-  }
-}
-</script>
 
 <style scoped>
 
@@ -108,7 +105,7 @@ textarea {
 @media only screen and (max-width: 600px) {
   .review-form {
     width: 90%;
-    margin: 0px;
+    margin-left: 0px;
   }
 }
 </style>
