@@ -32,7 +32,6 @@ const props = defineProps({
   -moz-box-shadow: 0px 2px 20px -12px rgba(0, 0, 0, 0.57);
   box-shadow: 2px 20px -12px rgba(0, 0, 0, 0.57);
   margin-left: 40px;
-  box-sizing: border-box;
 }
 
 .review-container li {
@@ -43,6 +42,7 @@ const props = defineProps({
   .review-container {
     width: 90%;
     margin-left: 0px;
+    box-sizing: border-box;
   }
 }
 </style>
