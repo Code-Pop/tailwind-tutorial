@@ -121,11 +121,6 @@ function addReview(review) {
   border-radius: 50%;
 }
 
-.disabledButton {
-  background-color: #d8d8d8;
-  cursor: not-allowed;
-}
-
 img {
   border: 2px solid #d8d8d8;
   width: 70%;

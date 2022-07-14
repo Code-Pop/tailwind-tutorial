@@ -40,3 +40,8 @@ li {
   text-align: center;
   cursor: pointer;
 }
+
+.disabledButton {
+  background-color: #d8d8d8;
+  cursor: not-allowed;
+}
