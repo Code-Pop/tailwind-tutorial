@@ -1,7 +1,5 @@
 <script setup>
 import { ref, computed } from 'vue'
-import ReviewForm from './ReviewForm.vue'
-import ReviewList from './ReviewList.vue'
 import socksBlueImage from '../assets/socks_blue.jpg'
 import socksGreenImage from '../assets/socks_green.jpg'
 
@@ -23,8 +21,6 @@ const variants = ref([
   { id: 2234, color: 'green', image: socksGreenImage, quantity: 50 },
   { id: 2235, color: 'blue', image: socksBlueImage, quantity: 0 },
 ])
-
-const reviews = ref([])
     
 const title = computed(() => {
   return brand.value + ' ' + product.value
@@ -35,7 +31,7 @@ const image = computed(() => {
 })
 
 const inStock = computed(() => {
-  return variants.value[selectedVariant.value].quantity
+  return variants.value[selectedVariant.value].quantity > 0
 })
 
 const shipping = computed(() => {
@@ -51,10 +47,6 @@ function addToCart() {
 
 function updateVariant(index) {
   selectedVariant.value = index
-}
-
-function addReview(review) {
-  reviews.value.push(review)
 }
 </script>
 
@@ -74,32 +66,30 @@ function addReview(review) {
         </ul>
         <div 
           v-for="(variant, index) in variants" 
+          class="color-circle" 
+          :style="{ backgroundColor: variant.color }"
           :key="variant.id" 
           @mouseover="updateVariant(index)" 
-          class="color-circle" 
-          :style="{ backgroundColor: variant.color }">
+        >
         </div>
         
         <button 
           class="button" 
-          :class="{ disabledButton: !inStock }" 
+          :class="{ disabled: !inStock }" 
           :disabled="!inStock" 
-          v-on:click="addToCart">
+          @click="addToCart"
+        >
           Add to Cart
         </button>
       </div>
     </div>
-    <review-list v-if="reviews.length" :reviews="reviews"></review-list>
-    <review-form @review-submitted="addReview"></review-form>
   </div>
 </template>
 
 <style scoped>
 
 .product-display {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
+  padding: 16px;
 }
 
 .product-container {
@@ -108,9 +98,20 @@ function addReview(review) {
   flex-wrap: wrap;
 }
 
-.product-image,
+.product-image {
+  width: 100%;
+}
+
+img {
+  width: 70%;
+  margin: 40px;
+  padding: 15px;
+  border: 2px solid #d8d8d8;
+}
+
 .product-info {
-  width: 50%;
+  width: 100%;
+  margin-left: 10px;
 }
 
 .color-circle {
@@ -121,26 +122,37 @@ function addReview(review) {
   border-radius: 50%;
 }
 
-img {
-  border: 2px solid #d8d8d8;
-  width: 70%;
-  margin: 40px;
-  padding: 15px;
-  -webkit-box-shadow: 0px 2px 15px -12px rgba(0, 0, 0, 0.57);
-  -moz-box-shadow: 0px 2px 15px -12px rgba(0, 0, 0, 0.57);
-  box-shadow: 2px 15px -12px rgba(0, 0, 0, 0.57);
+.button {
+  width: 160px;
+  height: 60px;
+  margin: 30px;
+  padding: 20px;
+  font-size: 18px;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: inset 0 -0.6em 1em -0.35em rgba(0, 0, 0, 0.17),
+    inset 0 0.6em 2em -0.3em rgba(255, 255, 255, 0.15),
+    inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
+  
+  background-color: #39495c;
+  cursor: pointer;
 }
 
-@media only screen and (max-width: 600px) {
+.button.disabled {
+  background-color: #d8d8d8;
+  cursor: not-allowed;
+}
 
-  .product-display {
-    width: 100%;
+@media only screen and (min-width: 860px) {
+
+  .product-image {
+    width: 50%;
   }
 
-  .product-image,
   .product-info {
-    margin-left: 10px;
-    width: 100%;
+    width: 50%;
+    margin-left: 0;
   }
-}
+} 
 </style>
