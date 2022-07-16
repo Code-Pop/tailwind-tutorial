@@ -57,12 +57,16 @@ function addReview(review) {
 </script>
 
 <template>
-  <div class="product-display">
-    <div class="product-container">
-      <div class="product-image">
-        <img v-bind:src="image">
+  <div class="p-4">
+    <!-- product container: -->
+    <div class="flex flex-row flex-wrap">
+      <div class="w-[100%] md:w-[50%]">
+        <img class = "border-2 border-solid border-[#d8d8d8] w-[70%] m-[40px] p-[15px]"
+          v-bind:src="image"
+        >
       </div>
-      <div class="product-info">
+      <!-- product info: -->
+      <div class="w-[100%] ml-[10px] md:w-[50%] md:ml-0 ">
         <h1>{{ title }}</h1>
         <p v-if="inStock">In Stock</p>
         <p v-else>Out of Stock</p>
@@ -70,17 +74,22 @@ function addReview(review) {
         <ul>
           <li v-for="detail in details">{{ detail }}</li>
         </ul>
+        <!-- color circles: -->
         <div 
           v-for="(variant, index) in variants" 
           :key="variant.id" 
           @mouseover="updateVariant(index)" 
-          class="color-circle" 
-          :style="{ backgroundColor: variant.color }">
+          class="w-[50px] h-[50px] mt-[8px] border-2 border-solid border-[#d8d8d8] rounded-[50%]" 
+          :class="{
+            green: 'bg-[green]',
+            blue: 'bg-[blue]'
+          }[variant.color]"
+        >
         </div>
-        
+
         <button 
-          class="button" 
-          :class="{ disabledButton: !inStock }" 
+          class="button-shade m-[30px] rounded-[5px] text-[18px] w-[160px] h-[60px] text-white p-[20px] text-center cursor-pointer" 
+          :class=" inStock ? ['bg-[#39495c]'] : ['bg-[#d8d8d8]', 'cursor-not-allowed']"  
           :disabled="!inStock" 
           v-on:click="addToCart">
           Add to Cart
@@ -91,7 +100,7 @@ function addReview(review) {
 </template>
 
 <style scoped>
-
+/* 
 .product-display {
   padding: 1rem;
 }
@@ -138,7 +147,7 @@ img {
   cursor: pointer;
 }
 
-.disabledButton {
+.button-bg.disabledButton {
   background-color: #d8d8d8;
   cursor: not-allowed;
 }
@@ -154,4 +163,5 @@ img {
     margin-left: 0;
   }
 } 
+*/
 </style>
