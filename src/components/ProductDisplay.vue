@@ -1,7 +1,5 @@
 <script setup>
 import { ref, computed } from 'vue'
-import ReviewForm from './ReviewForm.vue'
-import ReviewList from './ReviewList.vue'
 import socksBlueImage from '../assets/socks_blue.jpg'
 import socksGreenImage from '../assets/socks_green.jpg'
 
@@ -89,16 +87,12 @@ function addReview(review) {
         </button>
       </div>
     </div>
-    <review-list v-if="reviews.length" :reviews="reviews"></review-list>
-    <review-form @review-submitted="addReview"></review-form>
   </div>
 </template>
 
 <style scoped>
 
 .product-display {
-  display: flex;
-  flex-direction: column;
   padding: 1rem;
 }
 
@@ -110,7 +104,7 @@ function addReview(review) {
 
 .product-image,
 .product-info {
-  width: 50%;
+  width: 100%;
 }
 
 .color-circle {
@@ -126,21 +120,38 @@ img {
   width: 70%;
   margin: 40px;
   padding: 15px;
-  -webkit-box-shadow: 0px 2px 15px -12px rgba(0, 0, 0, 0.57);
-  -moz-box-shadow: 0px 2px 15px -12px rgba(0, 0, 0, 0.57);
-  box-shadow: 2px 15px -12px rgba(0, 0, 0, 0.57);
 }
 
-@media only screen and (max-width: 600px) {
+.button {
+  margin: 30px;
+  background-color: #39495c;
+  border-radius: 5px;
+  font-size: 18px;
+  width: 160px;
+  height: 60px;
+  color: white;
+  padding: 20px;
+  box-shadow: inset 0 -0.6em 1em -0.35em rgba(0, 0, 0, 0.17),
+    inset 0 0.6em 2em -0.3em rgba(255, 255, 255, 0.15),
+    inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
+  text-align: center;
+  cursor: pointer;
+}
 
-  .product-display {
-    width: 100%;
-  }
+.disabledButton {
+  background-color: #d8d8d8;
+  cursor: not-allowed;
+}
+
+@media only screen and (min-width: 600px) {
 
   .product-image,
   .product-info {
-    margin-left: 10px;
-    width: 100%;
+    width: 50%;
   }
-}
+
+  .product-info {
+    margin-left: 0;
+  }
+} 
 </style>
