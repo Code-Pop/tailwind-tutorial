@@ -61,7 +61,7 @@ function addReview(review) {
     <!-- product container: -->
     <div class="flex flex-row flex-wrap">
       <div class="w-[100%] md:w-[50%]">
-        <img class = "border-2 border-solid border-[#d8d8d8] w-[70%] m-[40px] p-[15px]"
+        <img class = "border-2 border-solid border-light-gray w-[70%] m-[40px] p-[15px]"
           v-bind:src="image"
         >
       </div>
@@ -79,7 +79,7 @@ function addReview(review) {
           v-for="(variant, index) in variants" 
           :key="variant.id" 
           @mouseover="updateVariant(index)" 
-          class="w-[50px] h-[50px] mt-[8px] border-2 border-solid border-[#d8d8d8] rounded-[50%]" 
+          class="w-[50px] h-[50px] mt-[8px] border-2 border-solid border-light-gray rounded-[50%]" 
           :class="{
             green: 'bg-[green]',
             blue: 'bg-[blue]'
@@ -89,7 +89,7 @@ function addReview(review) {
 
         <button 
           class="button-shade m-[30px] rounded-[5px] text-[18px] w-[160px] h-[60px] text-white p-[20px] text-center cursor-pointer" 
-          :class=" inStock ? ['bg-[#39495c]'] : ['bg-[#d8d8d8]', 'cursor-not-allowed']"  
+          :class="inStock ? ['bg-dark'] : ['bg-light-gray', 'cursor-not-allowed']"  
           :disabled="!inStock" 
           v-on:click="addToCart">
           Add to Cart
