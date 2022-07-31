@@ -11,9 +11,11 @@ function updateCart(id) {
 </script>
 
 <template>
-  <div class="nav-bar"></div>
-
-  <div class="cart">Cart({{ cart.length }})</div>
+  <div class="nav-bar">
+  </div>
+  <div class="cart">
+    Cart({{ cart.length }})
+  </div>
   <product-display :premium="premium" @add-to-cart="updateCart"></product-display>
 </template>
 
