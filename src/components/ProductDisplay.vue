@@ -51,12 +51,14 @@ function updateVariant(index) {
 </script>
 
 <template>
-  <div class="product-display">
-    <div class="product-container">
-      <div class="product-image">
-        <img v-bind:src="image">
+  <div class="p-4">
+    <div class="flex flex-row flex-wrap">
+      <div class="w-[100%] md:w-[50%]">
+        <img class="w-[70%] m-10 p-4 border-2 border-solid border-[#d8d8d8]"
+          v-bind:src="image"
+        />
       </div>
-      <div class="product-info">
+      <div class="w-[100%] md:w-[50%] ml-3 md:ml-0">
         <h1>{{ title }}</h1>
         <p v-if="inStock">In Stock</p>
         <p v-else>Out of Stock</p>
@@ -88,7 +90,7 @@ function updateVariant(index) {
 
 <style scoped>
 
-.product-display {
+/* .product-display {
   padding: 16px;
 }
 
@@ -112,7 +114,7 @@ img {
 .product-info {
   width: 100%;
   margin-left: 10px;
-}
+} */
 
 .color-circle {
   width: 50px;
@@ -144,7 +146,7 @@ img {
   cursor: not-allowed;
 }
 
-@media only screen and (min-width: 860px) {
+/* @media only screen and (min-width: 860px) {
 
   .product-image {
     width: 50%;
@@ -154,5 +156,5 @@ img {
     width: 50%;
     margin-left: 0;
   }
-} 
+}  */
 </style>
