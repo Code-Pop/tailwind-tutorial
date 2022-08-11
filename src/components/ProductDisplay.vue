@@ -68,17 +68,22 @@ function updateVariant(index) {
         </ul>
         <div 
           v-for="(variant, index) in variants" 
-          class="color-circle" 
-          :style="{ backgroundColor: variant.color }"
+          class="w-12 h-12 mt-2 border-2 border-solid border-[#d8d8d8] rounded-[50%]" 
+          :class="{
+            green: 'bg-[green]',
+            blue: 'bg-[blue]'
+          }[variant.color]"
           :key="variant.id" 
           @mouseover="updateVariant(index)" 
         >
         </div>
         
         <button 
-          class="button" 
-          :class="{ disabled: !inStock }" 
-          :disabled="!inStock" 
+          class="w-40 h-16 m-8 p-5 text-lg leading-none text-white text-center rounded-[5px] btn-shading-bn" 
+          :class="inStock ? 
+            ['bg-[#39495c]', 'cursor-pointer'] : 
+            ['bg-[#d8d8d8]', 'cursor-not-allowed']" 
+          :disabled="!inStock"
           @click="addToCart"
         >
           Add to Cart
@@ -116,7 +121,7 @@ img {
   margin-left: 10px;
 } */
 
-.color-circle {
+/* .color-circle {
   width: 50px;
   height: 50px;
   margin-top: 8px;
@@ -133,18 +138,14 @@ img {
   color: white;
   text-align: center;
   border-radius: 5px;
-  box-shadow: inset 0 -0.6em 1em -0.35em rgba(0, 0, 0, 0.17),
-    inset 0 0.6em 2em -0.3em rgba(255, 255, 255, 0.15),
-    inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
-  
   background-color: #39495c;
   cursor: pointer;
-}
+} */
 
-.button.disabled {
+/* .button.disabled {
   background-color: #d8d8d8;
   cursor: not-allowed;
-}
+} */
 
 /* @media only screen and (min-width: 860px) {
 
